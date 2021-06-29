@@ -232,6 +232,8 @@ class ClassNumber:
             import matplotlib.pyplot as plt
             import matplotlib as mpl
             import numpy as np
+            import operator
+
             
             #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
             
@@ -933,36 +935,76 @@ class ClassNumber:
                 plt.plot([cnt1,cnt2,cnt3,cnt4,cnt5,cnt6,cnt7,cnt8],[sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5,sil_score_6,sil_score_7,sil_score_8],'.', markersize=12)
                 recommended_value=np.sort([sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5,sil_score_6,sil_score_7,sil_score_8])
                 recommended_value=np.argmax(recommended_value, axis=0)
+                
+                a = np.array([[cnt1,cnt2,cnt3,cnt4,cnt5,cnt6,cnt7,cnt8],[sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5,sil_score_6,sil_score_7,sil_score_8]])
+                a=np.transpose(a); a=a[a[:, 1].argsort()]
+                a1=a[:,0]; a2=a[:,1]
+                idx_max, value = max(enumerate(a2), key=operator.itemgetter(1))
+                recommended_value=a1[idx_max]
             
             elif cnt==7:
                 plt.plot([cnt1,cnt2,cnt3,cnt4,cnt5,cnt6,cnt7],[sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5,sil_score_6,sil_score_7],'.', markersize=12)
                 recommended_value=np.sort([sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5,sil_score_6,sil_score_7])
                 recommended_value=np.argmax(recommended_value, axis=0)
                 
+                a = np.array([[cnt1,cnt2,cnt3,cnt4,cnt5,cnt6,cnt7],[sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5,sil_score_6,sil_score_7]])
+                a=np.transpose(a); a=a[a[:, 1].argsort()]
+                a1=a[:,0]; a2=a[:,1]
+                idx_max, value = max(enumerate(a2), key=operator.itemgetter(1))
+                recommended_value=a1[idx_max]
+                
             elif cnt==6:
                 plt.plot([cnt1,cnt2,cnt3,cnt4,cnt5,cnt6],[sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5,sil_score_6],'.', markersize=12)
                 recommended_value=np.sort([sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5,sil_score_6])
                 recommended_value=np.argmax(recommended_value, axis=0)
+                
+                a = np.array([[cnt1,cnt2,cnt3,cnt4,cnt5,cnt6],[sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5,sil_score_6]])
+                a=np.transpose(a); a=a[a[:, 1].argsort()]
+                a1=a[:,0]; a2=a[:,1]
+                idx_max, value = max(enumerate(a2), key=operator.itemgetter(1))
+                recommended_value=a1[idx_max]
 
             elif cnt==5:
                 plt.plot([cnt1,cnt2,cnt3,cnt4,cnt5],[sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5],'.', markersize=12)
                 recommended_value=np.sort([sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5])
                 recommended_value=np.argmax(recommended_value, axis=0)
                 
+                a = np.array([[cnt1,cnt2,cnt3,cnt4,cnt5],[sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5]])
+                a=np.transpose(a); a=a[a[:, 1].argsort()]
+                a1=a[:,0]; a2=a[:,1]
+                idx_max, value = max(enumerate(a2), key=operator.itemgetter(1))
+                recommended_value=a1[idx_max]
+                
             elif cnt==4:
                 plt.plot([cnt1,cnt2,cnt3,cnt4],[sil_score_1,sil_score_2,sil_score_3,sil_score_4],'.', markersize=12)
                 recommended_value=np.sort([sil_score_1,sil_score_2,sil_score_3,sil_score_4])
                 recommended_value=np.argmax(recommended_value, axis=0)
                 
+                a = np.array([[cnt1,cnt2,cnt3,cnt4],[sil_score_1,sil_score_2,sil_score_3,sil_score_4]])
+                a=np.transpose(a); a=a[a[:, 1].argsort()]
+                a1=a[:,0]; a2=a[:,1]
+                idx_max, value = max(enumerate(a2), key=operator.itemgetter(1))
+                recommended_value=a1[idx_max]
+                
             elif cnt==3:
                 plt.plot([cnt1,cnt2,cnt3],[sil_score_1,sil_score_2,sil_score_3],'.', markersize=12)
-                recommended_value=np.sort([sil_score_1,sil_score_2,sil_score_3])
-                recommended_value=np.argmax(recommended_value, axis=0)
+                
+                a = np.array([[cnt1,cnt2,cnt3],[sil_score_1,sil_score_2,sil_score_3]])
+                a=np.transpose(a); a=a[a[:, 1].argsort()]
+                a1=a[:,0]; a2=a[:,1]
+                idx_max, value = max(enumerate(a2), key=operator.itemgetter(1))
+                recommended_value=a1[idx_max]
                 
             elif cnt==2:
                 plt.plot([cnt1,cnt2],[sil_score_1,sil_score_2],'.', markersize=12)
                 recommended_value=np.sort([sil_score_1,sil_score_2])
                 recommended_value=np.argmax(recommended_value, axis=0)
+                
+                a = np.array([[cnt1,cnt2],[sil_score_1,sil_score_2]])
+                a=np.transpose(a); a=a[a[:, 1].argsort()]
+                a1=a[:,0]; a2=a[:,1]
+                idx_max, value = max(enumerate(a2), key=operator.itemgetter(1))
+                recommended_value=a1[idx_max]
                 
             elif cnt==1:
                 plt.plot([cnt1],[sil_score_1],'.', markersize=12)
