@@ -8,8 +8,8 @@
                               -------------------
         begin                : 2021-06-21
         git sha              : $Format:%H$
-        copyright            : (C) 2021 by gia
-        email                : schokulele@yahoo.de
+        copyright            : (C) 2021 by Gianna Persichini
+        email                : gimap@mail.de
  ***************************************************************************/
 
 /***************************************************************************
@@ -216,6 +216,8 @@ class ClassNumber:
         self.dlg.cb_inVector_8.clear()  # Clear the contents of the comboBox from previous runs
         self.dlg.cb_inVector_8.addItems([layer.name() for layer in layers])  # Populate the comboBox with names of all the loaded layers
         
+        
+        
         self.dlg.show()   # show the dialog
         result = self.dlg.exec_() # Run the dialog event loop
         # See if OK was pressed
@@ -234,15 +236,15 @@ class ClassNumber:
             import numpy as np
             import operator
 
-            
             #### #### #### #### #### #### #### #### #### #### #### #### #### #### #### ####
             
             def pseudosihouette(boma,bottom_type):  #### make pseudo sihouette function
-                
+                    
                     if len(boma[0])>1:
         
-                        boma= np.delete(boma,np.where(~boma.any(axis=1))[0], axis=0)
-                        boma=1-boma
+                        boma= np.delete(boma,np.where(~boma.any(axis=1))[0], axis=0) # zero rows are excluded
+                        boma=1-boma # make pseudo distance to centroids out of probabilities
+                        
                         diffvec=np.zeros( [len(boma)] )
                         diffvec[:]=np.nan
 
@@ -266,15 +268,19 @@ class ClassNumber:
                         silhouettescore=0
                     
                     if len(boma[0])>1:
+                    
+                        # nans at the beginning of the vector leads to total nan-vecs.. so get rid of them before further calculation        
+                        nan_array = np.isnan(diffvec); not_nan_array = ~ nan_array; diffvec=diffvec[not_nan_array]
                         diffvec=diffvec/max(diffvec) #norm by maximum distance
                         
                         '''
-                        plt.figure(8)
+                        plt.figure(22)
                         plt.plot(diffvec)
                         plt.show()
                         '''
                         
                         silhouettescore=np.nanmean(diffvec)
+                        print("one finished :)")
                         return silhouettescore
             
             cnt=0
@@ -355,6 +361,112 @@ class ClassNumber:
                         boma[count1,5]=fea_t['BottomType6Membership']
                         boma[count1,6]=fea_t['BottomType7Membership']
                         boma[count1,7]=fea_t['BottomType8Membership']
+                elif len(class_nb) == 9:
+                    for fea_t in laye_r_1.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']
+                elif len(class_nb) == 10:
+                    for fea_t in laye_r_1.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership']     
+                elif len(class_nb) == 11:
+                    for fea_t in laye_r_1.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                elif len(class_nb) == 12:
+                    for fea_t in laye_r_1.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                elif len(class_nb) == 13:
+                    for fea_t in laye_r_1.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                elif len(class_nb) == 14:
+                    for fea_t in laye_r_1.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                elif len(class_nb) == 15:
+                    for fea_t in laye_r_1.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                        boma[count1,14]=fea_t['BottomType15Membership']
+                        
                 sil_score_1=pseudosihouette(boma,bottom_type)
                 cnt1=len(class_nb)
                 ####
@@ -416,7 +528,7 @@ class ClassNumber:
                         boma[count1,4]=fea_t['BottomType5Membership']
                         boma[count1,5]=fea_t['BottomType6Membership']
                 elif len(class_nb) == 7:
-                    for fea_t in laye_r_1.getFeatures():
+                    for fea_t in laye_r_2.getFeatures():
                         count1=count1+1
                         boma[count1,0]=fea_t['BottomType1Membership']
                         boma[count1,1]=fea_t['BottomType2Membership']
@@ -426,7 +538,7 @@ class ClassNumber:
                         boma[count1,5]=fea_t['BottomType6Membership']
                         boma[count1,6]=fea_t['BottomType7Membership']
                 elif len(class_nb) == 8:
-                    for fea_t in laye_r_1.getFeatures():
+                    for fea_t in laye_r_2.getFeatures():
                         count1=count1+1
                         boma[count1,0]=fea_t['BottomType1Membership']
                         boma[count1,1]=fea_t['BottomType2Membership']
@@ -436,6 +548,112 @@ class ClassNumber:
                         boma[count1,5]=fea_t['BottomType6Membership']
                         boma[count1,6]=fea_t['BottomType7Membership']
                         boma[count1,7]=fea_t['BottomType8Membership']
+                elif len(class_nb) == 9:
+                    for fea_t in laye_r_2.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']
+                elif len(class_nb) == 10:
+                    for fea_t in laye_r_2.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership']     
+                elif len(class_nb) == 11:
+                    for fea_t in laye_r_2.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                elif len(class_nb) == 12:
+                    for fea_t in laye_r_2.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                elif len(class_nb) == 13:
+                    for fea_t in laye_r_2.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                elif len(class_nb) == 14:
+                    for fea_t in laye_r_2.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                elif len(class_nb) == 15:
+                    for fea_t in laye_r_2.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                        boma[count1,14]=fea_t['BottomType15Membership']        
+                        
                 sil_score_2=pseudosihouette(boma,bottom_type)
                 cnt2=len(class_nb)
                 ####
@@ -497,7 +715,7 @@ class ClassNumber:
                         boma[count1,4]=fea_t['BottomType5Membership']
                         boma[count1,5]=fea_t['BottomType6Membership']
                 elif len(class_nb) == 7:
-                    for fea_t in laye_r_1.getFeatures():
+                    for fea_t in laye_r_3.getFeatures():
                         count1=count1+1
                         boma[count1,0]=fea_t['BottomType1Membership']
                         boma[count1,1]=fea_t['BottomType2Membership']
@@ -507,7 +725,7 @@ class ClassNumber:
                         boma[count1,5]=fea_t['BottomType6Membership']
                         boma[count1,6]=fea_t['BottomType7Membership']
                 elif len(class_nb) == 8:
-                    for fea_t in laye_r_1.getFeatures():
+                    for fea_t in laye_r_3.getFeatures():
                         count1=count1+1
                         boma[count1,0]=fea_t['BottomType1Membership']
                         boma[count1,1]=fea_t['BottomType2Membership']
@@ -517,6 +735,112 @@ class ClassNumber:
                         boma[count1,5]=fea_t['BottomType6Membership']
                         boma[count1,6]=fea_t['BottomType7Membership']
                         boma[count1,7]=fea_t['BottomType8Membership']
+                elif len(class_nb) == 9:
+                    for fea_t in laye_r_3.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']
+                elif len(class_nb) == 10:
+                    for fea_t in laye_r_3.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership']     
+                elif len(class_nb) == 11:
+                    for fea_t in laye_r_3.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                elif len(class_nb) == 12:
+                    for fea_t in laye_r_3.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                elif len(class_nb) == 13:
+                    for fea_t in laye_r_3.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                elif len(class_nb) == 14:
+                    for fea_t in laye_r_3.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                elif len(class_nb) == 15:
+                    for fea_t in laye_r_3.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                        boma[count1,14]=fea_t['BottomType15Membership']   
+                        
                 sil_score_3=pseudosihouette(boma,bottom_type)
                 cnt3=len(class_nb)
                 ####
@@ -579,7 +903,7 @@ class ClassNumber:
                         boma[count1,4]=fea_t['BottomType5Membership']
                         boma[count1,5]=fea_t['BottomType6Membership']
                 elif len(class_nb) == 7:
-                    for fea_t in laye_r_1.getFeatures():
+                    for fea_t in laye_r_4.getFeatures():
                         count1=count1+1
                         boma[count1,0]=fea_t['BottomType1Membership']
                         boma[count1,1]=fea_t['BottomType2Membership']
@@ -589,7 +913,7 @@ class ClassNumber:
                         boma[count1,5]=fea_t['BottomType6Membership']
                         boma[count1,6]=fea_t['BottomType7Membership']
                 elif len(class_nb) == 8:
-                    for fea_t in laye_r_1.getFeatures():
+                    for fea_t in laye_r_4.getFeatures():
                         count1=count1+1
                         boma[count1,0]=fea_t['BottomType1Membership']
                         boma[count1,1]=fea_t['BottomType2Membership']
@@ -599,6 +923,112 @@ class ClassNumber:
                         boma[count1,5]=fea_t['BottomType6Membership']
                         boma[count1,6]=fea_t['BottomType7Membership']
                         boma[count1,7]=fea_t['BottomType8Membership']
+                elif len(class_nb) == 9:
+                    for fea_t in laye_r_4.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']
+                elif len(class_nb) == 10:
+                    for fea_t in laye_r_4.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership']     
+                elif len(class_nb) == 11:
+                    for fea_t in laye_r_4.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                elif len(class_nb) == 12:
+                    for fea_t in laye_r_4.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                elif len(class_nb) == 13:
+                    for fea_t in laye_r_4.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                elif len(class_nb) == 14:
+                    for fea_t in laye_r_4.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                elif len(class_nb) == 15:
+                    for fea_t in laye_r_4.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                        boma[count1,14]=fea_t['BottomType15Membership']   
+                        
                 sil_score_4=pseudosihouette(boma,bottom_type)
                 cnt4=len(class_nb)
                 ####
@@ -680,6 +1110,112 @@ class ClassNumber:
                         boma[count1,5]=fea_t['BottomType6Membership']
                         boma[count1,6]=fea_t['BottomType7Membership']
                         boma[count1,7]=fea_t['BottomType8Membership']
+                elif len(class_nb) == 9:
+                    for fea_t in laye_r_5.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']
+                elif len(class_nb) == 10:
+                    for fea_t in laye_r_5.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership']     
+                elif len(class_nb) == 11:
+                    for fea_t in laye_r_5.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                elif len(class_nb) == 12:
+                    for fea_t in laye_r_5.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                elif len(class_nb) == 13:
+                    for fea_t in laye_r_5.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                elif len(class_nb) == 14:
+                    for fea_t in laye_r_5.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                elif len(class_nb) == 15:
+                    for fea_t in laye_r_5.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                        boma[count1,14]=fea_t['BottomType15Membership']   
+                        
                 sil_score_5=pseudosihouette(boma,bottom_type)
                 cnt5=len(class_nb)
                 ####
@@ -761,6 +1297,112 @@ class ClassNumber:
                         boma[count1,5]=fea_t['BottomType6Membership']
                         boma[count1,6]=fea_t['BottomType7Membership']
                         boma[count1,7]=fea_t['BottomType8Membership']
+                elif len(class_nb) == 9:
+                    for fea_t in laye_r_6.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']
+                elif len(class_nb) == 10:
+                    for fea_t in laye_r_6.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership']     
+                elif len(class_nb) == 11:
+                    for fea_t in laye_r_6.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                elif len(class_nb) == 12:
+                    for fea_t in laye_r_6.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                elif len(class_nb) == 13:
+                    for fea_t in laye_r_6.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                elif len(class_nb) == 14:
+                    for fea_t in laye_r_6.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                elif len(class_nb) == 15:
+                    for fea_t in laye_r_6.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                        boma[count1,14]=fea_t['BottomType15Membership']   
+                        
                 sil_score_6=pseudosihouette(boma,bottom_type)
                 cnt6=len(class_nb)
                 ####
@@ -842,6 +1484,112 @@ class ClassNumber:
                         boma[count1,5]=fea_t['BottomType6Membership']
                         boma[count1,6]=fea_t['BottomType7Membership']
                         boma[count1,7]=fea_t['BottomType8Membership']
+                elif len(class_nb) == 9:
+                    for fea_t in laye_r_7.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']
+                elif len(class_nb) == 10:
+                    for fea_t in laye_r_7.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership']     
+                elif len(class_nb) == 11:
+                    for fea_t in laye_r_7.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                elif len(class_nb) == 12:
+                    for fea_t in laye_r_7.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                elif len(class_nb) == 13:
+                    for fea_t in laye_r_7.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                elif len(class_nb) == 14:
+                    for fea_t in laye_r_7.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                elif len(class_nb) == 15:
+                    for fea_t in laye_r_7.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                        boma[count1,14]=fea_t['BottomType15Membership']   
+                        
                 sil_score_7=pseudosihouette(boma,bottom_type)
                 cnt7=len(class_nb)
                 ####
@@ -923,6 +1671,112 @@ class ClassNumber:
                         boma[count1,5]=fea_t['BottomType6Membership']
                         boma[count1,6]=fea_t['BottomType7Membership']
                         boma[count1,7]=fea_t['BottomType8Membership']
+                elif len(class_nb) == 9:
+                    for fea_t in laye_r_8.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']
+                elif len(class_nb) == 10:
+                    for fea_t in laye_r_8.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership']     
+                elif len(class_nb) == 11:
+                    for fea_t in laye_r_8.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                elif len(class_nb) == 12:
+                    for fea_t in laye_r_8.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                elif len(class_nb) == 13:
+                    for fea_t in laye_r_8.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                elif len(class_nb) == 14:
+                    for fea_t in laye_r_8.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                elif len(class_nb) == 15:
+                    for fea_t in laye_r_8.getFeatures():
+                        count1=count1+1
+                        boma[count1,0]=fea_t['BottomType1Membership']
+                        boma[count1,1]=fea_t['BottomType2Membership']
+                        boma[count1,2]=fea_t['BottomType3Membership']
+                        boma[count1,3]=fea_t['BottomType4Membership']
+                        boma[count1,4]=fea_t['BottomType5Membership']
+                        boma[count1,5]=fea_t['BottomType6Membership']
+                        boma[count1,6]=fea_t['BottomType7Membership']
+                        boma[count1,7]=fea_t['BottomType8Membership']
+                        boma[count1,8]=fea_t['BottomType9Membership']       
+                        boma[count1,9]=fea_t['BottomType10Membership'] 
+                        boma[count1,10]=fea_t['BottomType11Membership']
+                        boma[count1,11]=fea_t['BottomType12Membership']
+                        boma[count1,12]=fea_t['BottomType13Membership']
+                        boma[count1,13]=fea_t['BottomType14Membership']
+                        boma[count1,14]=fea_t['BottomType15Membership']   
+                        
                 sil_score_8=pseudosihouette(boma,bottom_type)
                 cnt8=len(class_nb)
                 ####
@@ -930,6 +1784,7 @@ class ClassNumber:
             
             plt.style.use('seaborn-whitegrid')
             fig, ax = plt.subplots(figsize=(7, 4))
+            
             
             if cnt==8:
                 plt.plot([cnt1,cnt2,cnt3,cnt4,cnt5,cnt6,cnt7,cnt8],[sil_score_1,sil_score_2,sil_score_3,sil_score_4,sil_score_5,sil_score_6,sil_score_7,sil_score_8],'.', markersize=12)
@@ -1010,6 +1865,7 @@ class ClassNumber:
                 plt.plot([cnt1],[sil_score_1],'.', markersize=12)
                 recommended_value=[sil_score_1]
                 recommended_value=np.argmax(recommended_value, axis=0)
+                
                 
             recommended_value='recommended class nb: '+ str(recommended_value)
             props = dict(boxstyle='round', facecolor='wheat', alpha=0.5)
